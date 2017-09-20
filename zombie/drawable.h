@@ -4,6 +4,7 @@
 class Drawable
 {
 public:
+	virtual ~Drawable() = default;
 	virtual void delete_();
 	bool should_delete();
 	virtual void draw(sf::RenderTarget& window);

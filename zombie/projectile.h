@@ -6,12 +6,13 @@
 class Projectile : public Moveable
 {
 public:
-	Projectile(sf::Vector2f pos, float angle, sf::Texture* texture) : Moveable(pos, angle, texture, Consts::PROJECTILE_SPEED)
+	Projectile(sf::Vector2f pos, float angle ) : Moveable(pos, angle, texture_, Consts::PROJECTILE_SPEED, Consts::BULLET_SIZE )
 	{
 		projectile_direction_ = Helper::movePointByAngle( 1, angle );
 	}
-
+	static sf::Texture* texture_;
 protected:
+	void handleCollision(Collidable* entity) override;
 	sf::Vector2f getNextMove(float delta_time_) override;
 	void handleEdge() override;
 private:

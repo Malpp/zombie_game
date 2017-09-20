@@ -1,13 +1,13 @@
 #pragma once
 #include "stdafx.h"
-#include "drawable.h"
+#include "collidable.h"
 
-class Moveable : public Drawable
+class Moveable : public Collidable
 {
 public:
-	virtual void update( float delta_time_ );
+	virtual void update(float delta_time_);
 protected:
-	Moveable( sf::Vector2f pos, float angle, sf::Texture* texture, float speed ) : Drawable( pos, angle, texture )
+	Moveable( sf::Vector2f pos, float angle, sf::Texture* texture, float speed, float collision_radius ) : Collidable( pos, angle, texture, collision_radius )
 	{
 		this->speed = speed;
 	}

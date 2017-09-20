@@ -148,10 +148,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="collidable.h" />
     <ClInclude Include="constants.h" />
     <ClInclude Include="controller.h" />
     <ClInclude Include="drawable.h" />
     <ClInclude Include="game.h" />
+    <ClInclude Include="handgun.h" />
     <ClInclude Include="helper.h" />
     <ClInclude Include="moveable.h" />
     <ClInclude Include="player.h" />
@@ -160,11 +162,15 @@
     <ClInclude Include="resources.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="weapon.h" />
+    <ClInclude Include="zombie.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="collidable.cpp" />
     <ClCompile Include="controller.cpp" />
     <ClCompile Include="drawable.cpp" />
     <ClCompile Include="game.cpp" />
+    <ClCompile Include="handgun.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="moveable.cpp" />
     <ClCompile Include="player.cpp" />
@@ -175,6 +181,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="weapon.cpp" />
+    <ClCompile Include="zombie.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SFML_Template.rc" />
@@ -187,6 +195,9 @@
       <DeploymentContent>true</DeploymentContent>
     </Image>
     <Image Include="Assets\player\idle.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="Assets\zombie\idle.png">
       <DeploymentContent>true</DeploymentContent>
     </Image>
   </ItemGroup>

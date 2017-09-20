@@ -3,23 +3,10 @@
 
 void Game::init()
 {
-	//Template variables
-	window.create( sf::VideoMode( Consts::WINDOW_WIDTH, Consts::WINDOW_HEIGHT ), "SFML", sf::Style::Close );
-	view.setSize( Consts::CAMARA_WIDTH, Consts::CAMERA_HEIGHT );
-	view.setCenter( Consts::GAME_WIDTH * 0.5f, Consts::GAME_HEIGHT * 0.5f );
-	window.setView( view );
-	clock.restart();
-	srand( time( nullptr ) );
-	rand();
-
-	//Add new vars here
-	player_texture_.loadFromFile( "Assets/player/idle.png" );
-	background_texture.loadFromFile( "Assets/background.png" );
-	projectile_texture_.loadFromFile( "Assets/bullet.png" );
-
-	background = sf::Sprite( background_texture );
 	controller_ = new Controller( &window );
-	player_ = new Player( &player_texture_, controller_ );
+	player_ = new Player( controller_ );
+
+	addZombie( sf::Vector2f( 100, 100 ), 0 );
 }
 
 void Game::input()
@@ -65,14 +52,26 @@ void Game::update()
 	frameCounter++;
 
 	//Add new stuff below this
-	player_->update( timeElapsed );
+	player_->update( timeElapsed, this );
 	sf::Vector2f cameraPos = player_->getPosition();
 	cameraPos.x = std::max( (float)Consts::CAMARA_WIDTH_HALF, std::min( (float)(Consts::GAME_WIDTH - Consts::CAMARA_WIDTH_HALF), cameraPos.x ) );
 	cameraPos.y = std::max( (float)Consts::CAMERA_HEIGHT_HALF, std::min( (float)(Consts::GAME_HEIGHT - Consts::CAMERA_HEIGHT_HALF), cameraPos.y ) );
 	view.setCenter( cameraPos );
 
-	if (sf::Mouse::isButtonPressed( sf::Mouse::Left ))
-		addProjectile( player_->getPosition(), player_->getAngle() + 180 );
+	//Check collisions
+	for (Zombie* zombie : zombies_)
+	{
+		if (zombie->checkCollision( player_ ))
+		{
+
+		}
+
+		for (Projectile* projectile : projectiles_)
+		{
+			projectile->checkCollision( zombie );
+		}
+	}
+
 	size_t projectiles_size = projectiles_.size();
 	for (int i = projectiles_size - 1; i >= 0; --i)
 	{
@@ -81,6 +80,17 @@ void Game::update()
 		{
 			delete projectiles_[i];
 			projectiles_.erase( projectiles_.begin() + i );
+		}
+	}
+
+	size_t zombie_size = zombies_.size();
+	for (int i = zombie_size - 1; i >= 0; --i)
+	{
+		zombies_[i]->update( timeElapsed, player_->getPosition() );
+		if (zombies_[i]->should_delete())
+		{
+			delete zombies_[i];
+			zombies_.erase( zombies_.begin() + i );
 		}
 	}
 }
@@ -95,6 +105,10 @@ void Game::draw()
 	//Draw code
 	window.draw( background );
 	player_->draw( window );
+	for (Zombie* zombie : zombies_)
+	{
+		zombie->draw( window );
+	}
 	for (Projectile* projectile : projectiles_)
 	{
 		projectile->draw( window );
@@ -103,13 +117,7 @@ void Game::draw()
 	window.display();
 }
 
-
-Game::Game()
-{
-
-}
-
-Game::~Game()
+void Game::resetGame()
 {
 	delete player_;
 	delete controller_;
@@ -117,6 +125,43 @@ Game::~Game()
 	{
 		delete projectile;
 	}
+	projectiles_.clear();
+	for (Zombie* zombie : zombies_)
+	{
+		delete zombie;
+	}
+	zombies_.clear();
+}
+
+
+Game::Game()
+{
+	//Template variables
+	window.create( sf::VideoMode( Consts::WINDOW_WIDTH, Consts::WINDOW_HEIGHT ), "SFML", sf::Style::Close );
+	view.setSize( Consts::CAMARA_WIDTH, Consts::CAMERA_HEIGHT );
+	view.setCenter( Consts::GAME_WIDTH * 0.5f, Consts::GAME_HEIGHT * 0.5f );
+	window.setView( view );
+	clock.restart();
+	srand( time( nullptr ) );
+	rand();
+
+	//Add new vars here
+	background_texture.loadFromFile( "Assets/background.png" );
+	background = sf::Sprite( background_texture );
+	Zombie::texture_ = new sf::Texture;
+	Zombie::texture_->loadFromFile( "Assets/zombie/idle.png" );
+	Projectile::texture_ = new sf::Texture;
+	Projectile::texture_->loadFromFile( "Assets/bullet.png" );
+	Player::idle_texture_ = new sf::Texture;
+	Player::idle_texture_->loadFromFile( "Assets/player/idle.png" );
+}
+
+Game::~Game()
+{
+	resetGame();
+	delete Zombie::texture_;
+	delete Projectile::texture_;
+	delete Player::idle_texture_;
 }
 
 void Game::run()
@@ -132,5 +177,11 @@ void Game::run()
 
 void Game::addProjectile( sf::Vector2f pos, float angle )
 {
-	projectiles_.push_back( new Projectile( pos, angle, &projectile_texture_ ) );
+	projectiles_.push_back( new Projectile( pos, angle ) );
 }
+
+void Game::addZombie( sf::Vector2f pos, float angle )
+{
+	zombies_.push_back( new Zombie( pos, angle ) );
+}
+
