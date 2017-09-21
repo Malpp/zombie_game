@@ -17,6 +17,8 @@ public:
 	//Add new vars here
 	void addProjectile(sf::Vector2f pos, float angle);
 	void addZombie( sf::Vector2f pos, float angle );
+	void addZombie();
+	sf::Vector2f generateSpawnPos( sf::Vector2f pos, sf::Vector2f size );
 private:
 	//Template variables
 	sf::RenderWindow window;
@@ -45,4 +47,8 @@ private:
 	std::vector<Zombie*> zombies_;
 	sf::Texture background_texture;
 	gameState current_state_;
+	float death_screen_rotation;
+	sf::Vector2f player_death_location;
+	float zombie_spawn_time_;
+	float zombie_spawn_timer_;
 };

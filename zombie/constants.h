@@ -15,10 +15,16 @@ namespace Consts
 	static const int PROJECTILE_SPEED = 1600;
 	static const int ZOMBIE_SPEED = 350;
 
-	static const float PLAYER_SIZE = 100;
+	static const float PLAYER_SIZE = 80;
 	static const float ZOMBIE_SIZE = 100;
 	static const float BULLET_SIZE = 5;
 
 	static const float HANDGUN_RELOAD = 0.25f;
 	static const int HANDGUN_AMMO = 100;
+	static const int HANDGUN_SPREAD = 2;
+	static const float RIFLE_RELOAD = 0.1f;
+	static const int RIFLE_AMMO = 300;
+	static const int RIFLE_SPREAD = 1;
+
+	static const float ZOMBIE_SPAWN_LENGTH = 500;
 }

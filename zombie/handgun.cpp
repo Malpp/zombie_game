@@ -4,5 +4,5 @@
 
 void Handgun::handleFire(Game* game, sf::Vector2f pos, float angle)
 {
-	game->addProjectile( pos, angle );
+	game->addProjectile( pos, angle + Helper::generateRandInt(-Consts::HANDGUN_SPREAD, Consts::HANDGUN_SPREAD) );
 }

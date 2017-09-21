@@ -4,6 +4,7 @@
 #include "controller.h"
 #include "weapon.h"
 #include "handgun.h"
+#include "rifle.h"
 class Game;
 
 class Player : public Moveable
@@ -22,6 +23,6 @@ protected:
 	void handleCollision( Collidable* entity ) override;
 private:
 	Controller* controller;
-	std::vector<Weapon*> weapons_ = {new Handgun};
+	std::vector<Weapon*> weapons_ = {new Handgun, new Rifle};
 	int current_weapon_;
 };
