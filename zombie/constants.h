@@ -2,6 +2,8 @@
 
 namespace Consts
 {
+	static const float FRAME_TIME = 0.01667f;
+
 	static const int GAME_HEIGHT = 4096;
 	static const int GAME_WIDTH = 4096;
 	static const int CAMERA_HEIGHT = 1080 * 2;
@@ -12,11 +14,11 @@ namespace Consts
 	static const int WINDOW_WIDTH = 1280;
 
 	static const int PLAYER_SPEED = 500;
-	static const int PROJECTILE_SPEED = 1600;
-	static const int ZOMBIE_SPEED = 350;
+	static const float PLAYER_SIZE = 70;
+	static const float PLAYER_INVINCIBILITY_DURATION = 1.0f;
+	static const int PLAYER_STARTING_LIVES = 5;
 
-	static const float PLAYER_SIZE = 80;
-	static const float ZOMBIE_SIZE = 100;
+	static const int PROJECTILE_SPEED = 1600;
 	static const float BULLET_SIZE = 5;
 
 	static const float HANDGUN_RELOAD = 0.25f;
@@ -26,5 +28,9 @@ namespace Consts
 	static const int RIFLE_AMMO = 300;
 	static const int RIFLE_SPREAD = 1;
 
-	static const float ZOMBIE_SPAWN_LENGTH = 500;
+	static const int ZOMBIE_SPEED = 350;
+	static const float ZOMBIE_SIZE = 90;
+	static const int ZOMBIE_SPEED_RANDOM = 50;
+	static const float ZOMBIE_SPAWN_LENGTH = 1000;
+	static const float ZOMBIE_DEFAULT_SPAWN_RATE = 1;
 }

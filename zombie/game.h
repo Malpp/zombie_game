@@ -18,6 +18,7 @@ public:
 	void addProjectile(sf::Vector2f pos, float angle);
 	void addZombie( sf::Vector2f pos, float angle );
 	void addZombie();
+	bool isPlayerInvicible() const;
 	sf::Vector2f generateSpawnPos( sf::Vector2f pos, sf::Vector2f size );
 private:
 	//Template variables
@@ -34,6 +35,7 @@ private:
 	int frameCounter = 0;
 
 	//Add new vars here
+	void setupDeathScreen(sf::Vector2f zombie_location);
 	enum gameState
 	{
 		Alive,
@@ -51,4 +53,12 @@ private:
 	sf::Vector2f player_death_location;
 	float zombie_spawn_time_;
 	float zombie_spawn_timer_;
+
+	sf::Font game_font_;
+	sf::Text death_text_;
+	sf::RectangleShape death_screen_shape_;
+	sf::Color death_color_;
+	float death_timer_;
+	bool is_player_invicible_;
+	float player_invicibility_timer_;
 };

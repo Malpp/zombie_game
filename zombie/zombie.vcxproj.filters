@@ -151,4 +151,7 @@
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
+  <ItemGroup>
+    <Font Include="Assets\emulogic.ttf" />
+  </ItemGroup>
 </Project>

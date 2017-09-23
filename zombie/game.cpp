@@ -3,11 +3,15 @@
 
 void Game::init()
 {
+	view = sf::View();
+	view.setSize( Consts::CAMARA_WIDTH, Consts::CAMERA_HEIGHT );
+	view.setCenter( Consts::GAME_WIDTH * 0.5f, Consts::GAME_HEIGHT * 0.5f );
+	window.setView( view );
 	controller_ = new Controller( &window );
 	player_ = new Player( controller_ );
 	current_state_ = Alive;
-	death_screen_rotation = 0.1f;
-	zombie_spawn_time_ = 1;
+	death_screen_rotation = 0.2f;
+	zombie_spawn_time_ = Consts::ZOMBIE_DEFAULT_SPAWN_RATE;
 	zombie_spawn_timer_ = 0;
 }
 
@@ -64,9 +68,13 @@ void Game::update()
 		//Check collisions
 		for (Zombie* zombie : zombies_)
 		{
-			if (zombie->checkCollision( player_ ))
+			if (player_->checkCollision( zombie ) && !player_->should_delete())
 			{
-
+				if (player_->isDead())
+				{
+					current_state_ = Dead;
+					setupDeathScreen( zombie->getPosition() );
+				}
 			}
 
 			for (Projectile* projectile : projectiles_)
@@ -87,16 +95,12 @@ void Game::update()
 		}
 
 		size_t zombie_size = zombies_.size();
+		std::vector<Collidable*> collision_vector( zombies_.begin(), zombies_.end() );
 		for (int i = zombie_size - 1; i >= 0; --i)
 		{
-			zombies_[i]->update( timeElapsed, player_->getPosition() );
-			if (zombies_[i]->checkCollision( player_ ))
-			{
-				current_state_ = Dead;
-				sf::Vector2f zombie_location = zombies_[i]->getPosition();
-				sf::Vector2f player_location = player_->getPosition();
-				player_death_location = (zombie_location + player_location) * 0.5f;
-			}
+			collision_vector.erase( collision_vector.begin() + i );
+			zombies_[i]->update( timeElapsed, player_->getPosition(), player_->isInvicible(), &collision_vector );
+			collision_vector.push_back( zombies_[i] );
 			if (zombies_[i]->should_delete())
 			{
 				delete zombies_[i];
@@ -106,7 +110,7 @@ void Game::update()
 
 		zombie_spawn_timer_ += timeElapsed;
 
-		if(zombie_spawn_timer_ > zombie_spawn_time_)
+		if (zombie_spawn_timer_ > zombie_spawn_time_)
 		{
 			zombie_spawn_timer_ = 0;
 			addZombie();
@@ -114,10 +118,24 @@ void Game::update()
 	}
 	else if (current_state_ == Dead)
 	{
-		view.setCenter( player_death_location );
-		view.rotate( death_screen_rotation );
-		view.zoom( 0.9995f );
-		death_screen_rotation *= 0.999f;
+		if (sf::Keyboard::isKeyPressed( sf::Keyboard::Return ))
+		{
+			resetGame();
+			init();
+		}
+		death_timer_ += timeElapsed;
+		if (death_timer_ > Consts::FRAME_TIME)
+		{
+			death_timer_ = 0;
+			view.rotate( death_screen_rotation );
+			view.zoom( 0.995f );
+			death_screen_rotation *= 0.9999999f;
+			if (Helper::generateRandInt( 0, 1 ) == 1 && death_color_.a < 255)
+			{
+				death_color_.a += 1;
+			}
+			death_screen_shape_.setFillColor( death_color_ );
+		}
 	}
 }
 
@@ -140,6 +158,13 @@ void Game::draw()
 		projectile->draw( window );
 	}
 
+	if (current_state_ == Dead)
+	{
+		window.setView( window.getDefaultView() );
+		window.draw( death_screen_shape_ );
+		window.draw( death_text_ );
+	}
+
 	window.display();
 }
 
@@ -159,14 +184,26 @@ void Game::resetGame()
 	zombies_.clear();
 }
 
+bool Game::isPlayerInvicible() const
+{
+	return is_player_invicible_;
+}
+
+void Game::setupDeathScreen( sf::Vector2f zombie_location )
+{
+	sf::Vector2f player_location = player_->getPosition();
+	player_death_location = (zombie_location + player_location) * 0.5f;
+	view.setCenter( player_death_location );
+	death_text_.setPosition( window.getDefaultView().getSize() * 0.5f );
+	death_color_ = sf::Color( 255, 0, 0, 0 );
+	death_timer_ = 1;
+}
+
 
 Game::Game()
 {
 	//Template variables
 	window.create( sf::VideoMode( Consts::WINDOW_WIDTH, Consts::WINDOW_HEIGHT ), "SFML", sf::Style::Close );
-	view.setSize( Consts::CAMARA_WIDTH, Consts::CAMERA_HEIGHT );
-	view.setCenter( Consts::GAME_WIDTH * 0.5f, Consts::GAME_HEIGHT * 0.5f );
-	window.setView( view );
 	clock.restart();
 	srand( time( nullptr ) );
 	rand();
@@ -180,6 +217,12 @@ Game::Game()
 	Projectile::texture_->loadFromFile( "Assets/bullet.png" );
 	Player::idle_texture_ = new sf::Texture;
 	Player::idle_texture_->loadFromFile( "Assets/player/idle.png" );
+
+	game_font_.loadFromFile( "Assets/emulogic.ttf" );
+	death_text_ = sf::Text( "      You are dead\nPress [Enter] to restart", game_font_ );
+	death_text_.setOrigin( sf::Vector2f( 12 * death_text_.getCharacterSize(), death_text_.getCharacterSize() ) );
+	death_screen_shape_ = sf::RectangleShape( window.getDefaultView().getSize() );
+	death_screen_shape_.setPosition( sf::Vector2f( 0, 0 ) );
 }
 
 Game::~Game()

@@ -16,7 +16,7 @@ public:
 		debug_circle_collision.setOrigin( collide_size_radius, collide_size_radius );
 	}
 	float getCollideRadius() const;
-	bool checkCollision(Collidable* collidable);
+	bool checkCollision(Collidable* collidable, bool should_handle = true);
 	void draw(sf::RenderTarget& window) override;
 protected:
 	virtual void handleCollision( Collidable* entity ) = 0;

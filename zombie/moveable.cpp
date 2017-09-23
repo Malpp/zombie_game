@@ -2,10 +2,22 @@
 #include "moveable.h"
 #include "game.h"
 
-void Moveable::update( float delta_time_ )
+void Moveable::update(float delta_time_, std::vector<Collidable*>* entities)
 {
 	sf::Vector2f move_by_pos = getNextMove( delta_time_ ) * speed * delta_time_;
 	sprite_.move( move_by_pos );
+
+	if(entities != nullptr && entities->size() > 0)
+	{
+		for (Collidable* entity : *entities)
+		{
+			if(checkCollision(entity, false))
+			{
+				sprite_.move( -move_by_pos );
+				break;
+			}
+		}
+	}
 
 	if (isAtEdge())
 	{
