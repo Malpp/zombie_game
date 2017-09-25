@@ -1,14 +1,17 @@
 #include "stdafx.h"
 #include "player.h"
 #include "game.h"
+#include "shotgun.h"
+#include "flamethrower.h"
 
 sf::Texture* Player::idle_texture_;
 
 Player::~Player()
 {
-	for (Weapon* weapon : weapons_)
+	delete default_gun_;
+	if(bonus_weapon != nullptr)
 	{
-		delete weapon;
+		delete bonus_weapon;
 	}
 }
 
@@ -24,20 +27,31 @@ void Player::update(float delta_time_, Game* game)
 		}
 	}
 
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num1))
+	if(bonus_weapon != nullptr)
 	{
-		current_weapon_ = Handgun_;
+		bonus_weapon->update(delta_time_);
 	}
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num2))
+	else
 	{
-		current_weapon_ = Rifle_;
+		default_gun_->update(delta_time_);
 	}
-	weapons_[current_weapon_]->update( delta_time_ );
 
-	//if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
+	if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
 	{
-		weapons_[current_weapon_]->fire( getPosition(), getAngle(), game );
+		if (bonus_weapon != nullptr)
+		{
+			bonus_weapon->fire(getPosition(), getAngle(), game);
+		}
+		else
+		{
+			default_gun_->fire(getPosition(), getAngle(), game);
+		}
+	}
+
+	if(bonus_weapon != nullptr && bonus_weapon->getAmmo() < 1)
+	{
+		delete bonus_weapon;
+		bonus_weapon = nullptr;
 	}
 
 	sprite_.setRotation( controller->getShootingAngle( sprite_.getPosition() ) + 180 );
@@ -57,6 +71,44 @@ bool Player::isDead() const
 bool Player::isInvicible() const
 {
 	return invincible_;
+}
+
+void Player::getExtraLife()
+{
+	lives++;
+}
+
+void Player::setBonusWeapon(BonusWeapons type)
+{
+	if(bonus_weapon != nullptr)
+	{
+		delete bonus_weapon;
+		bonus_weapon = nullptr;
+	}
+
+	switch (type)
+	{
+	case Shotgun_:
+		bonus_weapon = new Shotgun;
+		break;
+	case Flamethrower_:
+		bonus_weapon = new Flamethrower;
+		break;
+	}
+}
+
+bool Player::hasBonusWeapon()
+{
+	return bonus_weapon != nullptr;
+}
+
+int Player::getAmmo()
+{
+	if(bonus_weapon != nullptr)
+	{
+		return bonus_weapon->getAmmo();
+	}
+	return -1;
 }
 
 sf::Vector2f Player::getNextMove( float delta_time_ )

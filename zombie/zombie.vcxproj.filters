@@ -37,6 +37,18 @@
     <Filter Include="Source Files\Game\Weapon">
       <UniqueIdentifier>{93fb56e4-7110-44cb-9d69-9b37bba7ec1e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Game\Powerup">
+      <UniqueIdentifier>{9b1d18e3-2bfe-4b65-8b6d-ecbc6e72322d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Powerup">
+      <UniqueIdentifier>{4d45bd31-435d-43e3-a2cc-ef0ce8539947}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game\Weapon\Projectiles">
+      <UniqueIdentifier>{3646a9c7-90f0-4449-a9a8-f091a2f47bf7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Weapon\Projectiles">
+      <UniqueIdentifier>{d5c3601b-1de0-40da-ab5d-4748d57e27d2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="helper.h">
@@ -69,9 +81,6 @@
     <ClInclude Include="zombie.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
-    <ClInclude Include="projectile.h">
-      <Filter>Header Files\Game</Filter>
-    </ClInclude>
     <ClInclude Include="player.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
@@ -87,8 +96,32 @@
     <ClInclude Include="handgun.h">
       <Filter>Header Files\Game\Weapon</Filter>
     </ClInclude>
-    <ClInclude Include="rifle.h">
+    <ClInclude Include="powerup.h">
+      <Filter>Header Files\Game\Powerup</Filter>
+    </ClInclude>
+    <ClInclude Include="shotgun_power.h">
+      <Filter>Header Files\Game\Powerup</Filter>
+    </ClInclude>
+    <ClInclude Include="shotgun.h">
       <Filter>Header Files\Game\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="flamethrower_power.h">
+      <Filter>Header Files\Game\Powerup</Filter>
+    </ClInclude>
+    <ClInclude Include="rpg_power.h">
+      <Filter>Header Files\Game\Powerup</Filter>
+    </ClInclude>
+    <ClInclude Include="flamethrower.h">
+      <Filter>Header Files\Game\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="projectile.h">
+      <Filter>Header Files\Game\Weapon\Projectiles</Filter>
+    </ClInclude>
+    <ClInclude Include="bullet.h">
+      <Filter>Header Files\Game\Weapon\Projectiles</Filter>
+    </ClInclude>
+    <ClInclude Include="flame.h">
+      <Filter>Header Files\Game\Weapon\Projectiles</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -116,9 +149,6 @@
     <ClCompile Include="player.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
-    <ClCompile Include="projectile.cpp">
-      <Filter>Source Files\Game</Filter>
-    </ClCompile>
     <ClCompile Include="zombie.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
@@ -128,8 +158,32 @@
     <ClCompile Include="handgun.cpp">
       <Filter>Source Files\Game\Weapon</Filter>
     </ClCompile>
-    <ClCompile Include="rifle.cpp">
+    <ClCompile Include="powerup.cpp">
+      <Filter>Source Files\Game\Powerup</Filter>
+    </ClCompile>
+    <ClCompile Include="shotgun_power.cpp">
+      <Filter>Source Files\Game\Powerup</Filter>
+    </ClCompile>
+    <ClCompile Include="shotgun.cpp">
       <Filter>Source Files\Game\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="flamethrower_power.cpp">
+      <Filter>Source Files\Game\Powerup</Filter>
+    </ClCompile>
+    <ClCompile Include="rpg_power.cpp">
+      <Filter>Source Files\Game\Powerup</Filter>
+    </ClCompile>
+    <ClCompile Include="flamethrower.cpp">
+      <Filter>Source Files\Game\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="projectile.cpp">
+      <Filter>Source Files\Game\Weapon\Projectiles</Filter>
+    </ClCompile>
+    <ClCompile Include="bullet.cpp">
+      <Filter>Source Files\Game\Weapon\Projectiles</Filter>
+    </ClCompile>
+    <ClCompile Include="flame.cpp">
+      <Filter>Source Files\Game\Weapon\Projectiles</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -148,6 +202,27 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="Assets\zombie\idle.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\weapons\flamethrower.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\weapons\flamethrower_s.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\weapons\rocket.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\weapons\rocket_s.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\weapons\shotgun.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\weapons\shotgun_s.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\weapons\flame.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

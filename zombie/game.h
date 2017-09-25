@@ -3,8 +3,8 @@
 #include "player.h"
 #include "controller.h"
 #include "projectile.h"
-#include "resources.h"
 #include "zombie.h"
+#include "powerup.h"
 
 class Game
 {
@@ -15,11 +15,10 @@ public:
 	void run();
 
 	//Add new vars here
-	void addProjectile(sf::Vector2f pos, float angle);
-	void addZombie( sf::Vector2f pos, float angle );
+	void addProjectile(Projectile* projectile);
+	void addZombie(sf::Vector2f& pos, float angle);
 	void addZombie();
-	bool isPlayerInvicible() const;
-	sf::Vector2f generateSpawnPos( sf::Vector2f pos, sf::Vector2f size );
+	sf::Vector2f generateSpawnPos(sf::Vector2f& pos, sf::Vector2f& size, std::vector<Zombie*>& zombie_pos);
 private:
 	//Template variables
 	sf::RenderWindow window;
@@ -35,7 +34,12 @@ private:
 	int frameCounter = 0;
 
 	//Add new vars here
-	void setupDeathScreen(sf::Vector2f zombie_location);
+	void setupDeathScreen(sf::Vector2f& zombie_location);
+	void updateScoreText();
+	void updateLifeText();
+	void addScore();
+	bool checkZombieSpawnCollision(const std::vector<sf::Vector2f>& zombies_pos, sf::Vector2f& spawn_pos);
+	PowerUp* getRandomPowerup(sf::Vector2f& spawn_pos);
 	enum gameState
 	{
 		Alive,
@@ -59,6 +63,12 @@ private:
 	sf::RectangleShape death_screen_shape_;
 	sf::Color death_color_;
 	float death_timer_;
-	bool is_player_invicible_;
-	float player_invicibility_timer_;
+	sf::Text score_text_;
+	sf::Text life_text_;
+	sf::Text ammo_text_;
+	unsigned int score_;
+	int score_multiplier_;
+	float score_timer_;
+	int extra_life_counter_;
+	std::vector<PowerUp*> power_ups_;
 };

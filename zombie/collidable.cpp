@@ -22,7 +22,7 @@ bool Collidable::checkCollision( Collidable* collidable, bool should_handle )
 
 void Collidable::draw( sf::RenderTarget& window )
 {
-	debug_circle_collision.setPosition( sprite_.getPosition() );
-	window.draw( debug_circle_collision );
+	//debug_circle_collision.setPosition( sprite_.getPosition() );
+	//window.draw( debug_circle_collision );
 	Drawable::draw( window );
 }

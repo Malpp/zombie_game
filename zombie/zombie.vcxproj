@@ -148,35 +148,49 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="bullet.h" />
     <ClInclude Include="collidable.h" />
     <ClInclude Include="constants.h" />
     <ClInclude Include="controller.h" />
     <ClInclude Include="drawable.h" />
+    <ClInclude Include="flame.h" />
+    <ClInclude Include="flamethrower.h" />
+    <ClInclude Include="flamethrower_power.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="handgun.h" />
     <ClInclude Include="helper.h" />
     <ClInclude Include="moveable.h" />
     <ClInclude Include="player.h" />
+    <ClInclude Include="powerup.h" />
     <ClInclude Include="projectile.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="resources.h" />
-    <ClInclude Include="rifle.h" />
+    <ClInclude Include="rpg_power.h" />
+    <ClInclude Include="shotgun.h" />
+    <ClInclude Include="shotgun_power.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="weapon.h" />
     <ClInclude Include="zombie.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="bullet.cpp" />
     <ClCompile Include="collidable.cpp" />
     <ClCompile Include="controller.cpp" />
     <ClCompile Include="drawable.cpp" />
+    <ClCompile Include="flame.cpp" />
+    <ClCompile Include="flamethrower.cpp" />
+    <ClCompile Include="flamethrower_power.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="handgun.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="moveable.cpp" />
     <ClCompile Include="player.cpp" />
+    <ClCompile Include="powerup.cpp" />
     <ClCompile Include="projectile.cpp" />
-    <ClCompile Include="rifle.cpp" />
+    <ClCompile Include="rpg_power.cpp" />
+    <ClCompile Include="shotgun.cpp" />
+    <ClCompile Include="shotgun_power.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -198,6 +212,27 @@
     </Image>
     <Image Include="Assets\player\idle.png">
       <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="Assets\weapons\flame.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="Assets\weapons\flamethrower.png">
+      <DeploymentContent>false</DeploymentContent>
+    </Image>
+    <Image Include="Assets\weapons\flamethrower_s.png">
+      <DeploymentContent>false</DeploymentContent>
+    </Image>
+    <Image Include="Assets\weapons\rocket.png">
+      <DeploymentContent>false</DeploymentContent>
+    </Image>
+    <Image Include="Assets\weapons\rocket_s.png">
+      <DeploymentContent>false</DeploymentContent>
+    </Image>
+    <Image Include="Assets\weapons\shotgun.png">
+      <DeploymentContent>false</DeploymentContent>
+    </Image>
+    <Image Include="Assets\weapons\shotgun_s.png">
+      <DeploymentContent>false</DeploymentContent>
     </Image>
     <Image Include="Assets\zombie\idle.png">
       <DeploymentContent>true</DeploymentContent>

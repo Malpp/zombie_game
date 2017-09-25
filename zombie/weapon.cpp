@@ -27,7 +27,7 @@ int Weapon::getAmmo() const
 
 void Weapon::fire(sf::Vector2f pos, float angle, Game* game)
 {
-	if (ammo_ > 0 && ready_)
+	if (ammo_ != 0 && ready_)
 	{
 		handleFire(game, pos, angle);
 		--ammo_;

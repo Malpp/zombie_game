@@ -1,8 +1,6 @@
 #include "stdafx.h"
 #include "projectile.h"
 
-sf::Texture* Projectile::texture_;
-
 void Projectile::handleCollision(Collidable* entity)
 {
 	delete_();
