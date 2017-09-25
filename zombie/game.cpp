@@ -5,6 +5,8 @@
 #include "rpg_power.h"
 #include "bullet.h"
 #include "flame.h"
+#include "rocket.h"
+#include "explosion.h"
 
 void Game::init()
 {
@@ -87,11 +89,17 @@ void Game::update()
 		view.setCenter(cameraPos);
 
 		//Projectile update
-		for each (Projectile* projectile in projectiles_)
+		for (int i = projectiles_.size() - 1; i >= 0; i--)
 		{
-			projectile->update(timeElapsed);
+			projectiles_[i]->update(timeElapsed);
+			if (projectiles_[i]->should_delete())
+			{
+				delete projectiles_[i];
+				projectiles_.erase( projectiles_.begin() + i );
+			}
 		}
 
+		//Update powerups
 		for (int i = power_ups_.size() - 1; i >= 0; i--)
 		{
 			if(power_ups_[i]->checkCollision(player_))
@@ -341,6 +349,10 @@ Game::Game()
 	RPGPower::texture_->loadFromFile("Assets/weapons/rocket.png");
 	Flame::texture_ = new sf::Texture;
 	Flame::texture_->loadFromFile("Assets/weapons/flame.png");
+	Rocket::texture_ = new sf::Texture;
+	Rocket::texture_->loadFromFile( "Assets/weapons/rpg.png" );
+	Explosion::texture_ = new sf::Texture;
+	Explosion::texture_->loadFromFile( "Assets/weapons/explosion.png" );
 
 	game_font_.loadFromFile("Assets/emulogic.ttf");
 	death_text_ = sf::Text("      You are dead\nPress [Enter] to restart", game_font_);
@@ -368,6 +380,8 @@ Game::~Game()
 	delete FlameThrowerPower::texture_;
 	delete RPGPower::texture_;
 	delete Flame::texture_;
+	delete Rocket::texture_;
+	delete Explosion::texture_;
 }
 
 void Game::run()

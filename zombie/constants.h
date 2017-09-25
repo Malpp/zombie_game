@@ -15,7 +15,7 @@ namespace Consts
 
 	static const int PLAYER_SPEED = 500;
 	static const float PLAYER_SIZE = 70;
-	static const float PLAYER_INVINCIBILITY_DURATION = 1.0f;
+	static const float PLAYER_INVINCIBILITY_DURATION = 2.0f;
 	static const int PLAYER_STARTING_LIVES = 5;
 
 	static const int BULLET_SPEED = 1600;
@@ -38,6 +38,17 @@ namespace Consts
 	static const int FLAMETHROWER_AMMO = 200;
 	static const int FLAMETHROWER_SPREAD = 10;
 
+	static const float RPG_RELOAD = 1;
+	static const int RPG_AMMO = 20;
+	static const int RPG_SPREAD = 1;
+
+	static const int ROCKET_SPEED = 2000;
+	static const float ROCKET_SIZE = 33 / 2;
+
+	static const int EXPLOSION_SPEED = 0;
+	static const float EXPLOSION_SIZE = 200;
+	static const float EXPLOSION_DURATION = 1;
+
 	static const int ZOMBIE_SPEED = 350;
 	static const float ZOMBIE_SIZE = 90;
 	static const int ZOMBIE_SPEED_RANDOM = 50;
@@ -53,5 +64,5 @@ namespace Consts
 	
 	static const float POWERUP_SIZE_RADIUS = 50;
 	//under a roll for 1 to 100
-	static const int POWERUP_SPAWN_RATE = 5;
+	static const int POWERUP_SPAWN_RATE = 500;
 }

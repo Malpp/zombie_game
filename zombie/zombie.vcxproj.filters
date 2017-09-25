@@ -123,6 +123,15 @@
     <ClInclude Include="flame.h">
       <Filter>Header Files\Game\Weapon\Projectiles</Filter>
     </ClInclude>
+    <ClInclude Include="rocket.h">
+      <Filter>Header Files\Game\Weapon\Projectiles</Filter>
+    </ClInclude>
+    <ClInclude Include="rpg.h">
+      <Filter>Header Files\Game\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="explosion.h">
+      <Filter>Header Files\Game\Weapon\Projectiles</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -185,6 +194,15 @@
     <ClCompile Include="flame.cpp">
       <Filter>Source Files\Game\Weapon\Projectiles</Filter>
     </ClCompile>
+    <ClCompile Include="rocket.cpp">
+      <Filter>Source Files\Game\Weapon\Projectiles</Filter>
+    </ClCompile>
+    <ClCompile Include="rpg.cpp">
+      <Filter>Source Files\Game\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="explosion.cpp">
+      <Filter>Source Files\Game\Weapon\Projectiles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SFML_Template.rc">
@@ -223,6 +241,12 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="Assets\weapons\flame.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\weapons\rpg.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\weapons\explosion.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

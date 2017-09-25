@@ -3,6 +3,7 @@
 #include "game.h"
 #include "shotgun.h"
 #include "flamethrower.h"
+#include "rpg.h"
 
 sf::Texture* Player::idle_texture_;
 
@@ -93,6 +94,9 @@ void Player::setBonusWeapon(BonusWeapons type)
 		break;
 	case Flamethrower_:
 		bonus_weapon = new Flamethrower;
+		break;
+	case RPG_:
+		bonus_weapon = new RPG;
 		break;
 	}
 }

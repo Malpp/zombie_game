@@ -153,6 +153,7 @@
     <ClInclude Include="constants.h" />
     <ClInclude Include="controller.h" />
     <ClInclude Include="drawable.h" />
+    <ClInclude Include="explosion.h" />
     <ClInclude Include="flame.h" />
     <ClInclude Include="flamethrower.h" />
     <ClInclude Include="flamethrower_power.h" />
@@ -165,6 +166,8 @@
     <ClInclude Include="projectile.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="resources.h" />
+    <ClInclude Include="rocket.h" />
+    <ClInclude Include="rpg.h" />
     <ClInclude Include="rpg_power.h" />
     <ClInclude Include="shotgun.h" />
     <ClInclude Include="shotgun_power.h" />
@@ -178,6 +181,7 @@
     <ClCompile Include="collidable.cpp" />
     <ClCompile Include="controller.cpp" />
     <ClCompile Include="drawable.cpp" />
+    <ClCompile Include="explosion.cpp" />
     <ClCompile Include="flame.cpp" />
     <ClCompile Include="flamethrower.cpp" />
     <ClCompile Include="flamethrower_power.cpp" />
@@ -188,6 +192,8 @@
     <ClCompile Include="player.cpp" />
     <ClCompile Include="powerup.cpp" />
     <ClCompile Include="projectile.cpp" />
+    <ClCompile Include="rocket.cpp" />
+    <ClCompile Include="rpg.cpp" />
     <ClCompile Include="rpg_power.cpp" />
     <ClCompile Include="shotgun.cpp" />
     <ClCompile Include="shotgun_power.cpp" />
@@ -213,6 +219,9 @@
     <Image Include="Assets\player\idle.png">
       <DeploymentContent>true</DeploymentContent>
     </Image>
+    <Image Include="Assets\weapons\explosion.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
     <Image Include="Assets\weapons\flame.png">
       <DeploymentContent>true</DeploymentContent>
     </Image>
@@ -227,6 +236,9 @@
     </Image>
     <Image Include="Assets\weapons\rocket_s.png">
       <DeploymentContent>false</DeploymentContent>
+    </Image>
+    <Image Include="Assets\weapons\rpg.png">
+      <DeploymentContent>true</DeploymentContent>
     </Image>
     <Image Include="Assets\weapons\shotgun.png">
       <DeploymentContent>false</DeploymentContent>
