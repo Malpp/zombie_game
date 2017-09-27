@@ -80,6 +80,7 @@ void Game::update()
 		if(player_->hasBonusWeapon())
 		{
 			ammo_text_.setString(std::to_string(player_->getAmmo()));
+			
 		}
 
 		//Camera update
@@ -222,6 +223,7 @@ void Game::draw()
 
 	if(player_->hasBonusWeapon())
 	{
+		window.draw(ammo_icons_[player_->getBonusWeapon()]);
 		window.draw(ammo_text_);
 	}
 
@@ -353,6 +355,19 @@ Game::Game()
 	Rocket::texture_->loadFromFile( "Assets/weapons/rpg.png" );
 	Explosion::texture_ = new sf::Texture;
 	Explosion::texture_->loadFromFile( "Assets/weapons/explosion.png" );
+	for (size_t i = 0; i < 3; i++)
+	{
+		ammo_icons_textures_[i] = sf::Texture();
+	}
+	ammo_icons_textures_[0].loadFromFile("Assets/weapons/shotgun_s.png");
+	ammo_icons_textures_[1].loadFromFile("Assets/weapons/flamethrower_s.png");
+	ammo_icons_textures_[2].loadFromFile("Assets/weapons/rocket_s.png");
+
+	for (size_t i = 0; i < 3; i++)
+	{
+		ammo_icons_[i] = sf::Sprite(ammo_icons_textures_[i]);
+		ammo_icons_[i].setPosition(sf::Vector2f(5, 35));
+	}
 
 	game_font_.loadFromFile("Assets/emulogic.ttf");
 	death_text_ = sf::Text("      You are dead\nPress [Enter] to restart", game_font_);
@@ -367,7 +382,7 @@ Game::Game()
 	ammo_text_.setCharacterSize(15);
 	life_text_.setPosition(5, 5);
 	score_text_.setPosition(5, 20);
-	ammo_text_.setPosition(5, 35);
+	ammo_text_.setPosition(20, 35);
 }
 
 Game::~Game()

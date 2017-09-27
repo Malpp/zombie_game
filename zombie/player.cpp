@@ -23,6 +23,7 @@ void Player::update(float delta_time_, Game* game)
 		invicibility_timer_ += delta_time_;
 		if(invicibility_timer_ > Consts::PLAYER_INVINCIBILITY_DURATION)
 		{
+			sprite_.setColor(vulnerable_color_);
 			invicibility_timer_ = 0;
 			invincible_ = false;
 		}
@@ -81,6 +82,7 @@ void Player::getExtraLife()
 
 void Player::setBonusWeapon(BonusWeapons type)
 {
+	bonus_weapons_type_ = type;
 	if(bonus_weapon != nullptr)
 	{
 		delete bonus_weapon;
@@ -99,6 +101,11 @@ void Player::setBonusWeapon(BonusWeapons type)
 		bonus_weapon = new RPG;
 		break;
 	}
+}
+
+Player::BonusWeapons Player::getBonusWeapon()
+{
+	return bonus_weapons_type_;
 }
 
 bool Player::hasBonusWeapon()
@@ -127,5 +134,6 @@ void Player::handleCollision( Collidable* entity )
 	{
 		entity->delete_();
 		invincible_ = true;
+		sprite_.setColor(invincible_color_);
 	}
 }

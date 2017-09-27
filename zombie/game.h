@@ -71,4 +71,7 @@ private:
 	float score_timer_;
 	int extra_life_counter_;
 	std::vector<PowerUp*> power_ups_;
+
+	sf::Texture ammo_icons_textures_[3];
+	sf::Sprite ammo_icons_[3];
 };

@@ -14,6 +14,8 @@ public:
 		this->controller = controller;
 		lives = Consts::PLAYER_STARTING_LIVES;
 		invincible_ = false;
+		invincible_color_ = sf::Color(255, 255, 255, 128);
+		vulnerable_color_ = sf::Color(255, 255, 255);
 	}
 	~Player();
 	void update( float delta_time_, Game* game );
@@ -29,6 +31,7 @@ public:
 	bool isInvicible() const;
 	void getExtraLife();
 	void setBonusWeapon(BonusWeapons type);
+	BonusWeapons getBonusWeapon();
 	bool hasBonusWeapon();
 	int getAmmo();
 protected:
@@ -38,7 +41,10 @@ private:
 	Controller* controller;
 	Weapon* default_gun_ = new Handgun;
 	Weapon* bonus_weapon = nullptr;
+	BonusWeapons bonus_weapons_type_;
 	int lives;
 	bool invincible_;
 	float invicibility_timer_;
+	sf::Color invincible_color_;
+	sf::Color vulnerable_color_;
 };

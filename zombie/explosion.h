@@ -12,9 +12,9 @@ public:
 		explosion_timer_ = 0;
 	}
 	void update(float delta_time_, std::vector<Collidable*>* entities) override;
+	static sf::Texture* texture_;
 protected:
 	void handleCollision(Collidable* entity) override;
-public:
-	static sf::Texture* texture_;
+private:
 	float explosion_timer_;
 };
